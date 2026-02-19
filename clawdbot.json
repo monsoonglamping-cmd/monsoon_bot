@@ -27,12 +27,11 @@
     }
   },
   "channels": {
-"telegram": {
-  "enabled": true,
-  "botToken": "8431132023:AAGg3uFgRKdpHSXqOhB3zeOXH-o_C4EW62U",
-  "dmPolicy": "allowlist",
-  "allowFrom": ["6124537360"]
-}
+    "telegram": {
+      "enabled": true,
+      "botToken": "8431132023:AAGg3uFgRKdpHSXqOhB3zeOXH-o_C4EW62U",
+      "dmPolicy": "allowlist",
+      "allowFrom": ["6124537360"]
     }
   },
   "gateway": {

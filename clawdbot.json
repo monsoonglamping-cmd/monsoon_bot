@@ -1,0 +1,41 @@
+{
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "groq": {
+        "api": "openai-completions",
+        "baseUrl": "https://api.groq.com/openai/v1",
+        "apiKey": "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",
+        "models": [
+          {
+            "id": "llama-3.3-70b-versatile",
+            "name": "Llama 3.3 70B",
+            "contextWindow": 128000,
+            "maxTokens": 32768,
+            "input": ["text"]
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "/app/workspace",
+      "model": {
+        "primary": "groq/llama-3.3-70b-versatile"
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "botToken": "8431132023:AAGg3uFgRKdpHSXqOhB3zeOXH-o_C4EW62U",
+      "dmPolicy": "pairing"
+    }
+  },
+  "gateway": {
+    "port": 8080,
+    "mode": "local",
+    "bind": "0.0.0.0"
+  }
+}

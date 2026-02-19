@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -26,11 +27,17 @@ if (fs.existsSync(configSource)) {
   console.log('✅ Config copied');
 }
 
-// Запускаем gateway НАПРЯМУЮ (не через CLI)
+// Запускаем gateway в foreground режиме
 console.log('🤖 Starting Clawdbot gateway...');
-
-process.env.NODE_ENV = 'production';
-
-// Импортируем и запускаем gateway напрямую
-const gatewayPath = require.resolve('clawdbot/dist/gateway/gateway-main.js');
-require(gatewayPath);
+try {
+  execSync('npx clawdbot gateway run', { 
+    stdio: 'inherit',
+    env: { 
+      ...process.env,
+      NODE_ENV: 'production'
+    }
+  });
+} catch (error) {
+  console.error('❌ Failed:', error.message);
+  process.exit(1);
+}

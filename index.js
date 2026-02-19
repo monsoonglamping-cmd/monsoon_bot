@@ -1,12 +1,9 @@
-#!/usr/bin/env node
-
-const { execSync } = require('child_process');
+const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
 console.log('🚀 Monsoon Assistant starting...');
 
-// Создаём директории
 const configDir = path.join(process.env.HOME || '/root', '.clawdbot');
 const workspaceDir = '/app/workspace';
 
@@ -18,7 +15,6 @@ if (!fs.existsSync(workspaceDir)) {
   fs.mkdirSync(workspaceDir, { recursive: true });
 }
 
-// Копируем конфиг
 const configSource = path.join(__dirname, 'clawdbot.json');
 const configTarget = path.join(configDir, 'clawdbot.json');
 
@@ -27,17 +23,19 @@ if (fs.existsSync(configSource)) {
   console.log('✅ Config copied');
 }
 
-// Запускаем gateway в foreground режиме
-console.log('🤖 Starting Clawdbot gateway...');
-try {
-  execSync('npx clawdbot gateway run', { 
-    stdio: 'inherit',
-    env: { 
-      ...process.env,
-      NODE_ENV: 'production'
-    }
-  });
-} catch (error) {
-  console.error('❌ Failed:', error.message);
+console.log('🤖 Starting Clawdbot gateway in foreground mode...');
+
+const gateway = spawn('npx', ['clawdbot', 'gateway', 'run'], {
+  stdio: 'inherit',
+  env: { ...process.env, NODE_ENV: 'production' }
+});
+
+gateway.on('error', (error) => {
+  console.error('❌ Failed to start gateway:', error);
   process.exit(1);
-}
+});
+
+gateway.on('exit', (code) => {
+  console.log(`Gateway exited with code ${code}`);
+  process.exit(code);
+});

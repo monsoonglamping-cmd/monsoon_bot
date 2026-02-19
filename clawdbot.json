@@ -20,7 +20,7 @@
   },
   "agents": {
     "defaults": {
-      "workspace": "/app/workspace",
+      "workspace": "/tmp/workspace"
       "model": {
         "primary": "groq/llama-3.3-70b-versatile"
       }

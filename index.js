@@ -5,7 +5,8 @@ const path = require('path');
 console.log('🚀 Monsoon Assistant starting...');
 
 const configDir = path.join(process.env.HOME || '/root', '.clawdbot');
-const workspaceDir = '/app/workspace';
+const workspaceDir = '/tmp/workspace';
+
 
 if (!fs.existsSync(configDir)) {
   fs.mkdirSync(configDir, { recursive: true });

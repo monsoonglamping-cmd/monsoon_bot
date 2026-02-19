@@ -4,7 +4,7 @@
   "description": "Monsoon Glamping&Health Resort Assistant",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+  "start": "node --max-old-space-size=460 index.js"
   },
   "dependencies": {
     "clawdbot": "latest"

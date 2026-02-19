@@ -34,6 +34,13 @@
       "allowFrom": ["6124537360"]
     }
   },
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true
+      }
+    }
+  },
   "gateway": {
     "mode": "local"
   }
